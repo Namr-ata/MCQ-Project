@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .form-container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+        .form-container h2 {
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .form-control {
+            border-radius: 20px;
+        }
+        .btn-primary {
+            border-radius: 20px;
+            padding: 10px 24px; /* Adjusted padding for medium size */
+            font-size: 18px; /* Adjusted font size for medium size */
+        }
+        .login-link {
+            font-size: 14px;
+        }
+        .compulsory {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="col-md-6 form-container">
+            <h2>Sign Up</h2>
+            <form action="/register" method="post" onsubmit="return validateForm()">
+                <div class="form-group">
+                    <label for="username">Username<span class="compulsory">*</span></label>
+                    <input type="text" class="form-control" id="username" name="username">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email address<span class="compulsory">*</span></label>
+                    <input type="email" class="form-control" id="email" name="email">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password<span class="compulsory">*</span></label>
+                    <input type="password" class="form-control" id="password" name="password">
+                </div>
+                <button type="submit" class="btn btn-primary btn-block btn-sm">Register</button>
+            </form>
+            <p class="text-center mt-3 login-link">Already have an account? <a href="login.html">Login here</a></p>
+        </div>
+    </div>
+
+    <!-- Bootstrap and jQuery scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        function validateForm() {
+            var username = document.getElementById("username").value;
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("password").value;
+            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            var passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+}\-{:;"'?/>.<,]).{8,}$/;
+
+            if (username.trim() === "") {
+                alert("Username is required");
+                return false;
+            }
+
+            if (email.trim() === "") {
+                alert("Email address is required");
+                return false;
+            } else if (!emailRegex.test(email)) {
+                alert("Please enter a valid email address");
+                return false;
+            }
+
+            if (password.trim() === "") {
+                alert("Password is required");
+                return false;
+            } else if (!passwordRegex.test(password)) {
+                alert("Password must be at least 8 characters long and contain at least one digit, one lowercase letter, one uppercase letter, and one special character");
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+</body>
+</html>

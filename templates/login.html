@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .card {
+            border: none;
+            border-radius: 1rem;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+        }
+        .card-header {
+            background-color: #ffffff;
+            color: #130101;
+            border-bottom: none;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+        .form-group label {
+            font-weight: bold;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            border-radius: 20px; /* Added border-radius */
+            padding: 8px 20px; /* Adjusted padding for smaller size */
+            font-size: 16px; /* Adjusted font size */
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+        .btn-primary.focus, .btn-primary:focus {
+            box-shadow: none;
+        }
+        /* Added custom style for form inputs */
+        .form-control {
+            border-radius: 20px; /* Added border-radius */
+        }
+        .container {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .card {
+            max-width: 400px;
+            width: 100%;
+        }
+        .compulsory {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header text-center">
+                    <h2>Sign In</h2>
+                </div>
+                <div class="card-body">
+                    <form action="/login" method="post" onsubmit="return validateForm()" >
+                        <div class="form-group">
+                            <label for="username">Email address<span class="compulsory">*</span></label>
+                            <input type="email" name="email" class="form-control" id="username" aria-describedby="emailHelp" >
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password<span class="compulsory">*</span></label>
+                            <input type="password" class="form-control" id="password" name="password" >
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary">Login</button>
+                        </div>
+                    </form>
+                    <p class="text-center mt-3">Don't have an account? <a href="{{ url_for('register') }}">Register here</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap and jQuery scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        function validateForm() {
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            var passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+}\-{:;"'?/>.<,]).{8,}$/;
+
+            if (username.trim() === "") {
+                alert("Email address is required");
+                return false;
+            } else if (!emailRegex.test(username)) {
+                alert("Please enter a valid email address");
+                return false;
+            }
+
+            if (password.trim() === "") {
+                alert("Password is required");
+                return false;
+            } else if (!passwordRegex.test(password)) {
+                alert("Password must be at least 8 characters long and contain at least one digit, one lowercase letter, one uppercase letter, and one special character");
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+</body>
+</html>
